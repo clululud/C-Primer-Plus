@@ -1,0 +1,75 @@
+#include <stdio.h>
+#include <windows.h>
+#define SIZE 10
+#define COLS 4
+#define ROWS 3
+
+int sump(int *start,int *end)
+{
+	int total = 0;
+	while (start < end)
+	{
+		//total += *start; //把数组元素的值加起来
+		//start++;         //指针指向下一元素
+		//压缩
+		total += *start++;
+        //结合律从右向左 所以先++ 后*
+	}
+	return total;
+}
+/*
+         指针可以进行的操作
+		 1 赋值
+		 2 解引用  *运算符给出指针指向地址上储存的值
+		 3 取地址
+		 4 指针与整数相加
+		 5 递增指针
+		 6 指针减去一个整数
+		 7 递减指针
+		 8 指针求差  可以计算两个指针的差值
+		 9 使用关系运算符可以比较两个指针的值 前提是两个指针都指向相同类型的对象
+*/
+/*       
+         千万不要解引未初始化的指针！
+		 int *pt;
+		 *pt = 5;
+		 第二行的意思是把5储存在pt指向的位置 但是pt未被初始化，其值是一个随机值，所以不知道5将被
+		 存在何处 	 
+*/
+
+int sum(const int ar[], int n)
+{
+	int i;
+	int total = 0;
+	for (i = 0; i < n; i++)
+		total += ar[i];
+	return total;
+}
+/*这样使用const并不是要求原数组是常量 而是在函数处理数组过程中将其视为常量不可更改*/
+//关于const
+/*
+    1 const可以用来创建数组 指针 和指向const的指针
+	2 const可以保护关键字数组
+	         把const数据或非const数据的地址初始化为指向const的指针或为其赋值是合法的
+			 只能把非const数据的地址赋给普通指针
+	3 可以声明并初始化一个不能指向别处的指针
+	         double rates[5] = {88.99,100.12,59.45,183.11,340.5}
+			 double *const pc = rates//指针指向数组的开是且不可改变
+	  创建指针时还可以使用const两次，该指针既不能更改它所指向的地址，也不能修改指向地址
+	  上的值
+*/
+
+
+/*变长数组 : 可以使用变量指定数组的维度*/
+
+int sum2d(int ar[][COLS], int rows) /*列数固定为4 而行数被传递给形参rows*/
+{/*数组的维数必须是常量 不能用变量来代替COLS*/
+	int r;
+	int c;
+	int tot = 0;
+
+	for (r = 0; r < rows; r++)
+		for (c = 0; c < COLS; c++)
+			tot += ar[r][c];
+	return tot;
+}
